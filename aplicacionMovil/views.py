@@ -8,9 +8,9 @@ def index(request):
 
 
 def AplicacionMovil_list(request):
-    response= requests.get('http://127.0.0.1:8000/api/v1/lista')
+    response= requests.get('http://127.0.0.1:8080/api/v1/listas-aplicacion/')
     
     aplicacion= response.json()
-    return render(request, 'index.html', {'aplicacion': aplicacion})
+    return render(request, 'listar.html', {'aplicacion': aplicacion})
 
 

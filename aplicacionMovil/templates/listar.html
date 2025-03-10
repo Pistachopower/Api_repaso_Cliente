@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    
-      
-<p>Bienvenido</p>
-<br>
-<a href="{% url 'AplicacionMovil_list' %}">Hacer peticion</a>
+    {% for dato in aplicacion %}
+    <h2>Nombre: {{ dato.nombre }}</h2>
+    <h2>fechaCreacion: {{ dato.fechaCreacion }}</h2>
 
+    {% empty %}
+        <p>No hay datos disponibles.</p>
+    {% endfor %}
 </body>
 </html>
