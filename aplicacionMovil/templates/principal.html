@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplicacion</title>
+
+    {% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+  </head>
+  <body>
+    <!--Menú de navegación -->
+    {% include 'estructura/menu.html' %}
+
+    <header></header>
+
+    <main>
+      <div class="container mt-4">
+          <div class="row justify-content-center">
+              <div class="col-md-8 text-center">
+                  <div class="card shadow-sm p-4">
+                      <h2 class="mb-3 text-primary">Bienvenido a la Aplicación</h2>
+                      
+                      {% block contenido %}
+                          <p class="lead">Administra y consulta la información de tus aplicaciones de manera fácil y rápida.</p>
+                          
+                          <a href="{% url 'AplicacionMovil_list' %}" class="btn btn-primary btn-lg mt-3">
+                              📋 Listar Aplicaciones
+                          </a>
+                      {% endblock %}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </main>
+  
+
+    <footer>
+        <!-- Pie de página -->
+        {% include 'estructura/footer.html' %}
+    </footer>
+  </body>
+</html>

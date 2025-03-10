@@ -1,0 +1,30 @@
+{% extends 'principal.html' %}
+
+{% block contenido %}
+<h5>Información</h5>
+<div class="container mt-4">
+    <div class="row">
+        {% for dato in aplicacion %}
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p class="card-title">{{ dato.nombre }}</p>
+                    <p class="card-text"><strong>Fecha de Creación:</strong> {{ dato.fechaCreacion }}</p>
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-between">
+                        <a href="" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a href="" class="btn btn-warning btn-sm">Editar campo</a>
+                        <a href="" class="btn btn-primary btn-sm">Editar todo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="alert alert-warning">No hay datos disponibles.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
