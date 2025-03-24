@@ -19,6 +19,9 @@ urlpatterns = [
     
     path("comentario/editar-nombre/<int:comentario_id>/", views.comentario_editar_patch, name="comentario_editar_patch"),
     
+    path("comentario-editar/<int:comentario_id>/", views.comentario_editar_put, name="comentario_editar_put"),
+
+    
     
     
     

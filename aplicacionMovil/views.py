@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 import requests
 from django.core import serializers
@@ -6,6 +7,7 @@ from requests.exceptions import HTTPError
 from aplicacionMovil import helper
 from .forms import *
 import json
+from datetime import datetime, date
 
 # Create your views here.
 def index(request):
@@ -159,6 +161,70 @@ def comentario_editar_patch(request, comentario_id):
                     "comentarios/actualizarNombreComentario.html",
                     {"formulario": formulario, "comentario": comentario},
                 )
+
+
+
+def comentario_editar_put(request, comentario_id): 
+    datosFormulario = None
+    if request.method == "POST":
+        datosFormulario = request.POST
+
+    comentario = helper.obtener_comentario_select(comentario_id)
+    
+    fecha_obj = datetime.strptime(comentario["fecha_comentario"], "%Y-%m-%d").date()
+    
+    formulario = ComentarioForm(
+        datosFormulario,
+        initial={
+            "texto_comentario": comentario["texto_comentario"],
+            "puntuacion": comentario["puntuacion"],
+            "fecha_comentario": str(
+                date(year=fecha_obj.year, month=fecha_obj.month, day=fecha_obj.day)
+            ),
+            "appDisponibles": comentario["aplicacion_movil_nombre"],
+            "UsuarioDisponibles": comentario["usuario_rol"],
+        },
+    )
+    if request.method == "POST":
+        formulario = ComentarioForm(request.POST)
+        datos = request.POST.copy()
+        
+        datos["texto_comentario"] = request.POST.get("texto_comentario")
+
+        # Asegúrate de que los datos del formulario contienen los campos correctos
+        fecha_comentario = request.POST.get("fecha_comentario")
+        if fecha_comentario:
+            fecha_obj = datetime.strptime(fecha_comentario, "%Y-%m-%d").date()
+            datos["fecha_comentario"] = str(
+                date(year=fecha_obj.year, month=fecha_obj.month, day=fecha_obj.day)
+            )
+        else:
+            datos["fecha_comentario"] = None
+
+        datos["puntuacion"] = request.POST.get("puntuacion")
+        datos["aplicacion_movil"] = request.POST.get("aplicacion_movil")
+        datos["usuario"] = request.POST.get("usuario")
+
+        formulario = ComentarioForm(request.POST)
+            
+        headers = {
+            "Authorization": "Bearer y1Z9EUZX1I2uNC5DeCKW7o2p2gyvCb",
+            "Content-Type": "application/json",
+        }
+        
+        response = requests.put(
+            f"http://127.0.0.1:8080/api/v1/comentario-editar/{comentario_id}/",
+            headers=headers,
+            data=json.dumps(formulario.data),
+        )
+        
+        if response.status_code == requests.codes.ok:
+            return redirect("comentarios_list")
+        else:
+            print(response.status_code)
+            response.raise_for_status()
+        
+    return render(request, "comentarios/actualizarComentario.html", {"formulario": formulario, "comentario": comentario})
 
 
     

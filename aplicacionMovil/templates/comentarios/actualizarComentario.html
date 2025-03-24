@@ -1,0 +1,37 @@
+{% extends "estructura/principal.html" %}
+
+{% block contenido %}
+
+{% load django_bootstrap5 %}
+<form action = "{% url 'comentario_editar_put' comentario.id %}" method = "post"> 
+    
+    {% csrf_token %} 
+
+    <div class="mb-4">
+        {% bootstrap_field formulario.texto_comentario show_label=True %}
+    </div>
+    
+
+    <div class="mb-4">
+        {% bootstrap_field formulario.aplicacion_movil show_label=True %}
+    </div>
+
+    <div class="mb-4">
+        {% bootstrap_field formulario.puntuacion show_label=True %}
+    </div>
+
+    
+    <div class="mb-4">
+        {% bootstrap_field formulario.usuario  show_label=True %}
+    </div>
+
+    <div class="mb-4">
+        {% bootstrap_field formulario.fecha_comentario show_label=True %}
+    </div>
+
+    {% bootstrap_button "Enviar" button_type="submit" button_class="btn-primary" %}
+
+</form> 
+
+
+{% endblock %}
