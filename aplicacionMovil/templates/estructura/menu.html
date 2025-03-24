@@ -26,7 +26,18 @@
                     <ul class="dropdown-menu" aria-labelledby="clientesDropdown">
                         <li><a class="dropdown-item" href="{% url 'AplicacionMovil_list' %}">Lista aplicacion</a></li>
                     </ul>
+
                 </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="clientesDropdown" role="button" 
+                     data-bs-toggle="dropdown" aria-expanded="false">Comentarios</a>
+                  <ul class="dropdown-menu" aria-labelledby="clientesDropdown">
+                      <li><a class="dropdown-item" href="{% url 'comentarios_list' %}">Lista comentario</a></li>
+                      <li><a class="dropdown-item" href="{% url 'comentario_crear' %}">crear comentario</a></li>
+                  </ul>
+
+              </li>
             </ul>
         </div>
 

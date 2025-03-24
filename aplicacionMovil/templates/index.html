@@ -1,0 +1,36 @@
+{%extends "estructura/principal.html"%}
+
+{%block contenido %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      
+        <div class="col-md-8 text-center">
+            <div class="card shadow-sm p-4">
+              
+                <h2 class="mb-3 text-primary">Bienvenido a la Aplicación</h2>
+                
+                
+                    <p class="lead">Administra y consulta la información de tus aplicaciones de manera fácil y rápida.</p>
+                    
+                    <a href="{% url 'AplicacionMovil_list' %}" class="btn btn-primary btn-lg mt-3">
+                        Listar Aplicaciones
+                    </a>
+
+
+                
+
+                    <a href="{% url 'comentarios_list' %}" class="btn btn-primary btn-lg mt-3">
+                        Listar comentarios
+                  </a>
+
+                  <a href="{% url 'comentario_crear' %}" class="btn btn-primary btn-lg mt-3">
+                    crear comentario
+              </a>
+              
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+{%endblock %}

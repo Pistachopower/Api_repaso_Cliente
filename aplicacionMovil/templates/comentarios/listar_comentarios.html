@@ -1,0 +1,36 @@
+{% extends 'estructura/principal.html' %}
+
+{% block contenido %}
+
+<div class="container mt-4">
+    <div class="row">
+        {% for dato in comentarios %}
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p class="card-title">{{ dato.nombre }}</p>
+                    <p class="card-text"><strong>Fecha de Creación del comentario:</strong> {{ dato.texto_comentario }}</p>
+                    <p class="card-text"><strong>nombre:</strong> {{ dato.aplicacion_movil_nombre }}</p>
+                    <p class="card-text"><strong>puntuacion:</strong> {{ dato.puntuacion }}</p>
+                    <p class="card-text"><strong>rol:</strong> {{ dato.usuario_rol }}</p>
+                    <p class="card-text"><strong>fecha_comentario:</strong> {{ dato.fecha_comentario }}</p>
+
+                    
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'comentario_eliminar' dato.id%}" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a href="{% url 'comentario_editar_patch' dato.id%}" class="btn btn-warning btn-sm">Editar campo</a>
+                        <a href="" class="btn btn-primary btn-sm">Editar todo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="alert alert-warning">No hay datos disponibles.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

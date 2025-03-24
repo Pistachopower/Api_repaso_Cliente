@@ -1,0 +1,34 @@
+{% extends 'estructura/principal.html' %}
+
+{% block contenido %}
+<form
+  action="{% url 'comentario_crear' %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% load django_bootstrap5 %} {% csrf_token %}
+
+  <div class="mb-4">
+    {% bootstrap_field formulario.texto_comentario show_label=True %}
+  </div>
+
+  <div class="mb-4">
+    {% bootstrap_field formulario.puntuacion show_label=True %}
+  </div>
+
+  <div class="mb-4">
+    {% bootstrap_field formulario.fecha_comentario show_label=True %}
+  </div>
+
+  <div class="mb-4">
+    {% bootstrap_field formulario.aplicacion_movil show_label=True %}
+  </div>
+
+  <div class="mb-4">
+    {% bootstrap_field formulario.usuario show_label=True %}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}
